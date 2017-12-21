@@ -26,6 +26,7 @@ describe('Routes: Products', () => {
 
   afterEach(() => Product.remove({}));
 
+  // CREATE
   describe('POST /products', () => {
     context('when posting a product', () => {
       it('should return a new product with status code 200', (done) => {
@@ -51,6 +52,10 @@ describe('Routes: Products', () => {
     });
   });
 
+  // READ
+  // TODO READ
+
+  // UPDATE
   describe('PUT /products/:id', () => {
     context('when editing a product', () => {
       it('should update the product and return 200 as status code', (done) => {
@@ -70,6 +75,7 @@ describe('Routes: Products', () => {
     });
   });
 
+  // DELETE
   describe('DELETE /products/:id', () => {
     context('when deleting a product', () => {
       it('should delete a product and return 200 as status code', (done) => {
