@@ -4,7 +4,8 @@
   "description": "Projeto responsável por tratar do serviço de produtos do sistema de pagamento",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --require babel-polyfill --require babel-register"
+    "test": "mocha --require babel-polyfill --require babel-register",
+    "test:unit": "NODE_ENV=test mocha --opts test/unit/mocha.opts test/unit/**/*.test.js"
   },
   "repository": {
     "type": "git",
