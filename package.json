@@ -1,0 +1,36 @@
+{
+  "name": "heizenberg",
+  "version": "1.0.0",
+  "description": "Projeto responsável por tratar do serviço de produtos do sistema de pagamento",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --require babel-polyfill --require babel-register"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cs-desafio-capitulo/heizenberg.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cs-desafio-capitulo/heizenberg/issues"
+  },
+  "homepage": "https://github.com/cs-desafio-capitulo/heizenberg#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "mongoose": "^4.13.7"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
+    "chai": "^4.1.2",
+    "dotenv": "^4.0.0",
+    "eslint": "^4.13.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "mocha": "^4.0.1"
+  }
+}
