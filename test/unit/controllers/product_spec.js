@@ -9,6 +9,7 @@ describe('Controller: Products', () => {
     name: 'Default product',
     price: 100,
     quantity: 2,
+    active: true,
   }];
 
   const defaultRequest = {
@@ -67,7 +68,7 @@ describe('Controller: Products', () => {
     it('should call send with a list of products', () => {
       Product.find = sinon.stub();
 
-      Product.find.withArgs({}).resolves(defaultProduct);
+      Product.find.withArgs({ active: true }).resolves(defaultProduct);
       response.status.withArgs(200).returns(response);
       const productsController = new ProductsController(Product);
 
@@ -81,7 +82,7 @@ describe('Controller: Products', () => {
       it('should return 400', () => {
         response.status.withArgs(400).returns(response);
         Product.find = sinon.stub();
-        Product.find.withArgs({}).rejects({ message: 'Error' });
+        Product.find.withArgs({ active: true }).rejects({ message: 'Error' });
 
         const productsController = new ProductsController(Product);
 
@@ -108,7 +109,7 @@ describe('Controller: Products', () => {
 
     it('should call send with one product', () => {
       Product.find = sinon.stub();
-      Product.find.withArgs({ _id: fakeId }).resolves(defaultProduct);
+      Product.find.withArgs({ _id: fakeId, active: true }).resolves(defaultProduct);
 
       const productsController = new ProductsController(Product);
 
@@ -124,7 +125,7 @@ describe('Controller: Products', () => {
       it('should return 400 when an error occurs', () => {
         response.status.withArgs(400).returns(response);
         Product.find = sinon.stub();
-        Product.find.withArgs({ _id: fakeId }).rejects({ message: 'Error' });
+        Product.find.withArgs({ _id: fakeId, active: true }).rejects({ message: 'Error' });
 
         const productsController = new ProductsController(Product);
 
@@ -207,14 +208,14 @@ describe('Controller: Products', () => {
     };
 
     class fakeProduct {
-      static remove() {}
+      static findOneAndUpdate() {}
     }
 
-    const deleteStub = sinon.stub(fakeProduct, 'remove');
+    const findOneAndUpdateStub = sinon.stub(fakeProduct, 'findOneAndUpdate');
 
     context('when the product has been deleted', () => {
       it('should respond with 200 when the product has been deleted', () => {
-        deleteStub.withArgs({ _id: fakeId }).resolves([1]);
+        findOneAndUpdateStub.withArgs({ _id: fakeId }, { active: false }).resolves([1]);
 
         const productsController = new ProductsController(fakeProduct);
 
@@ -227,7 +228,7 @@ describe('Controller: Products', () => {
 
     context('when an error occurs', () => {
       it('should return 400', () => {
-        deleteStub.withArgs({ _id: fakeId }).rejects({ message: 'Error' });
+        findOneAndUpdateStub.withArgs({ _id: fakeId }, { active: false }).rejects({ message: 'Error' });
         response.status.withArgs(400).returns(response);
 
         const productsController = new ProductsController(fakeProduct);

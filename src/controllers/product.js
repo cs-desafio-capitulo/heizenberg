@@ -17,7 +17,7 @@ class ProductsController {
   // READ
   async get(req, res) {
     try {
-      const listOfProducts = await this.Product.find({});
+      const listOfProducts = await this.Product.find({ active: true });
       res.status(200).send(listOfProducts);
     } catch (err) {
       res.status(400).send(err.message);
@@ -26,7 +26,7 @@ class ProductsController {
 
   async getById(req, res) {
     try {
-      const product = await this.Product.find({ _id: req.params.id });
+      const product = await this.Product.find({ _id: req.params.id, active: true });
       res.status(200).send(product);
     } catch (err) {
       res.status(400).send(err.message);
@@ -46,7 +46,7 @@ class ProductsController {
   // DELETE
   async delete(req, res) {
     try {
-      await this.Product.remove({ _id: req.params.id });
+      await this.Product.findOneAndUpdate({ _id: req.params.id }, { active: false });
       res.sendStatus(200);
     } catch (err) {
       res.status(400).send(err.message);
