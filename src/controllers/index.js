@@ -50,6 +50,10 @@ const ProductsController = ProductObject => ({
       res.status(400).send(err.message);
     }
   },
+
+  notFound(req, res) {
+    res.sendStatus(404);
+  },
 });
 
 export default ProductsController(Product);
