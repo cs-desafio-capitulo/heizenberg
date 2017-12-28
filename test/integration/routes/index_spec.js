@@ -1,6 +1,6 @@
 import supertest from 'supertest';
 import { expect } from 'chai';
-import Product from '../../../src/models/product';
+import Product from '../../../src/models';
 import setupApp from '../../../src/app';
 
 describe('Routes: Products', () => {
