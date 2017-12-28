@@ -9,4 +9,5 @@ export default express.Router()
   .get(`${BASE_URL}/`, ProductsController.get)
   .get(`${BASE_URL}/:id`, ProductsController.getById)
   .put(`${BASE_URL}/:id`, ProductsController.update)
-  .delete(`${BASE_URL}/:id`, ProductsController.delete);
+  .delete(`${BASE_URL}/:id`, ProductsController.delete)
+  .all('*', ProductsController.notFound);
