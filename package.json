@@ -5,9 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "babel-node ./index.js",
-    "test": "npm run test:unit",
-    "test:integration": "NODE_ENV=test nyc mocha --require babel-register test/integration/**/*_spec.js -s 5000",
-    "test:unit": "NODE_ENV=test nyc mocha --require babel-register test/unit/**/*_spec.js -s 5000"
+    "test": "NODE_ENV=test nyc mocha --require babel-register test/**/**/*_spec.js"
   },
   "repository": {
     "type": "git",
