@@ -6,7 +6,7 @@ export default async (req, res, next) => {
       user: 123,
       service: 'HEIZENBERG',
       description: `${req.method} on ${req.url}`,
-      level: res.statusCode === 200 ? 'INFO' : 'ERROR',
+      level: res.statusCode < 400 ? 'INFO' : 'ERROR',
       date: Date.now(),
     });
   } catch (error) {
