@@ -1,5 +1,5 @@
 import supertest from 'supertest';
-import { expect } from 'chai';
+import mongoose from 'mongoose';
 import Product from '../../../src/models';
 import setupApp from '../../../src/app';
 
@@ -26,6 +26,10 @@ describe('Routes: Products', () => {
 
   afterEach(() => Product.remove({}));
 
+  after(() => {
+    mongoose.connection.close();
+  });
+
   // CREATE
   describe('POST /products', () => {
     context('when posting a product', () => {
@@ -38,16 +42,13 @@ describe('Routes: Products', () => {
           name: 'Default product',
           price: 100,
           quantity: 2,
+          active: true,
         };
 
         request
           .post('/products')
           .send(newProduct)
-          .end((err, res) => {
-            expect(res.statusCode).to.eql(200);
-            expect(res.body).to.eql(expectedSavedProduct);
-            done(err);
-          });
+          .expect(200, expectedSavedProduct, done);
       });
     });
   });
@@ -67,10 +68,7 @@ describe('Routes: Products', () => {
         request
           .put(`/products/${defaultId}`)
           .send(updatedProduct)
-          .end((err, res) => {
-            expect(res.status).to.eql(200);
-            done(err);
-          });
+          .expect(200, done);
       });
     });
   });
@@ -81,10 +79,7 @@ describe('Routes: Products', () => {
       it('should delete a product and return 200 as status code', (done) => {
         request
           .delete(`/products/${defaultId}`)
-          .end((err, res) => {
-            expect(res.status).to.eql(200);
-            done(err);
-          });
+          .expect(200, done);
       });
     });
   });

@@ -1,6 +1,6 @@
 import Product from '../models';
 
-const ProductsController = ProductObject => ({
+export const ProductsController = ProductObject => ({
   // CREATE
   async create(req, res) {
     const product = new ProductObject(req.body);
